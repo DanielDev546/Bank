@@ -1,214 +1,158 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DanBank | Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Sidebar transition utility */
-        #sidebar { transition: transform 0.3s ease-in-out; }
-        .mobile-closed { transform: translateX(-100%); }
-        @media (min-width: 768px) { .mobile-closed { transform: translateX(0); } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DanBank | Dashboard</title>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="dashboard.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gray-900 text-white">
 
-<header class="flex justify-between items-center p-4 bg-gray-800 shadow sticky top-0 z-40 md:hidden">
-  <div class="text-xl font-bold">Dan<span class="text-blue-500">Bank</span></div>
-  <button onclick="toggleSidebar()" class="px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600">☰</button>
-</header>
+<body>
 
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/60 hidden z-40 md:hidden" onclick="toggleSidebar()"></div>
-
-<aside id="sidebar" class="fixed top-0 left-0 h-full bg-gray-800 border-r border-white/10 z-50 w-72 mobile-closed">
-  <div class="h-full flex flex-col p-5">
-    <div class="flex items-center justify-between">
-      <div class="text-2xl font-bold">Dan<span class="text-blue-500">Bank</span></div>
-      <button onclick="toggleSidebar()" class="md:hidden p-2 rounded-lg bg-gray-700">✕</button>
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header">
+    <div class="brand">
+      Dan<span>Bank</span>
     </div>
-    <p id="userEmailSidebar" class="mt-4 text-sm text-gray-400 truncate"></p>
-    <div class="my-5 h-px bg-white/10"></div>
-    
-    <nav class="space-y-2 text-sm flex-1">
-      <button onclick="scrollToSection('cardsSection')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-700"><span>💳</span> My Cards</button>
-      <button onclick="scrollToSection('sendSection')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-700"><span>💸</span> Send Money</button>
-      <button onclick="scrollToSection('historySection')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-700"><span>📜</span> Transactions</button>
-      <button onclick="scrollToSection('chartSection')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-700"><span>📊</span> Overview</button>
-    </nav>
+    <button class="icon-btn" onclick="toggleSidebar()">☰</button>
+  </header>
 
-    <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-600 rounded-lg hover:bg-red-500 font-bold transition">
-      <span>🚪</span> Logout
-    </button>
-  </div>
-</aside>
+  <!-- SIDEBAR OVERLAY -->
+  <div id="sidebarOverlay" class="sidebar-overlay hidden" onclick="toggleSidebar()"></div>
 
-<main class="md:ml-72 max-w-6xl mx-auto py-10 px-6 space-y-10">
-    <section id="cardsSection" class="grid md:grid-cols-3 gap-6">
-        <div class="bg-gray-800 p-6 rounded-xl shadow border-t-4 border-indigo-500">
-            <p class="text-gray-400">Active Card Balance</p>
-            <h2 id="balance" class="text-3xl font-bold mt-2">₦0</h2>
-            <p id="activeCardName" class="text-xs text-indigo-400 mt-1 uppercase font-bold">No Active Card</p>
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar sidebar-closed">
+    <div class="sidebar-inner">
+      <div class="sidebar-top">
+        <div class="brand brand-lg">
+          Dan<span>Bank</span>
         </div>
+        <button class="icon-btn close-only" onclick="toggleSidebar()">✕</button>
+      </div>
 
-        <div class="bg-gray-800 p-6 rounded-xl shadow">
-            <h3 class="font-bold mb-4">My Cards</h3>
-            <div id="cards" class="space-y-2 max-h-40 overflow-y-auto mb-4"></div>
-            <button onclick="addCard()" class="w-full bg-indigo-600 py-2 rounded hover:bg-indigo-500 font-medium">+ Add New Card</button>
-        </div>
+      <p id="userEmailSidebar" class="user-email"></p>
 
-        <div class="bg-gray-800 p-6 rounded-xl shadow">
-            <h3 class="font-bold">Notifications</h3>
-            <ul id="notifications" class="text-gray-400 text-[10px] space-y-1 mt-2"></ul>
-        </div>
+      <div class="divider"></div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn" onclick="scrollToSection('cardsSection')">
+          <span class="emoji">💳</span> My Cards
+        </button>
+
+        <button class="nav-btn" onclick="scrollToSection('sendSection')">
+          <span class="emoji">💸</span> Send Money
+        </button>
+
+        <button class="nav-btn" onclick="scrollToSection('historySection')">
+          <span class="emoji">📜</span> Transactions
+        </button>
+
+        <button class="nav-btn" onclick="scrollToSection('chartSection')">
+          <span class="emoji">📊</span> Overview
+        </button>
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        <span class="emoji">🚪</span> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- TOP GRID -->
+    <section id="cardsSection" class="grid grid-3">
+      <!-- ACTIVE BALANCE -->
+      <div class="card card-accent">
+        <p class="muted">Active Card Balance</p>
+        <h2 id="balance" class="balance">₦0</h2>
+        <p id="activeCardName" class="active-card">No Active Card</p>
+      </div>
+
+      <!-- CARDS LIST -->
+      <div class="card">
+        <h3 class="card-title">My Cards</h3>
+        <div id="cards" class="cards-list"></div>
+        <button class="btn btn-primary btn-full" onclick="addCard()">+ Add New Card</button>
+      </div>
+
+      <!-- NOTIFICATIONS -->
+      <div class="card">
+        <h3 class="card-title">Notifications</h3>
+        <ul id="notifications" class="notifications"></ul>
+      </div>
     </section>
 
-    <section id="sendSection" class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-800 p-6 rounded-xl space-y-4">
-            <h3 class="font-bold text-lg">Send Money</h3>
-            <select id="bankSelect" class="w-full p-2 rounded bg-gray-700 border border-gray-600 outline-none">
-                <option value="">-- Choose Bank --</option>
-                <option value="First Bank">First Bank</option>
-                <option value="GTBank">GTBank</option>
-                <option value="Zenith Bank">Zenith Bank</option>
-            </select>
-            <input id="recipientName" type="text" placeholder="Recipient Name" class="w-full p-2 rounded bg-gray-700 border border-gray-600">
-            <input id="sendAmount" type="number" placeholder="₦ Amount" class="w-full p-2 rounded bg-gray-700 border border-gray-600">
-            <button onclick="sendMoney()" class="w-full bg-indigo-600 py-2 rounded hover:bg-indigo-500">Send Now</button>
-        </div>
+    <!-- SEND/RECEIVE -->
+    <section id="sendSection" class="grid grid-2">
+      <div class="card">
+        <h3 class="card-title">Send Money</h3>
 
-        <div class="bg-gray-800 p-6 rounded-xl space-y-4">
-            <h3 class="font-bold text-lg">Receive Money (Top Up)</h3>
-            <input id="receiveAmount" type="number" placeholder="₦ Amount" class="w-full p-2 rounded bg-gray-700 border border-gray-600">
-            <button onclick="receiveMoney()" class="w-full bg-green-600 py-2 rounded hover:bg-green-500">Deposit</button>
+        <div class="form">
+          <label class="label">Bank</label>
+          <select id="bankSelect" class="input">
+            <option value="">-- Choose Bank --</option>
+            <option value="First Bank">First Bank</option>
+            <option value="GTBank">GTBank</option>
+            <option value="Zenith Bank">Zenith Bank</option>
+          </select>
+
+          <label class="label">Recipient Name</label>
+          <input id="recipientName" class="input" type="text" placeholder="Recipient Name">
+
+          <label class="label">Amount</label>
+          <input id="sendAmount" class="input" type="number" placeholder="₦ Amount">
+
+          <button class="btn btn-primary btn-full" onclick="sendMoney()">Send Now</button>
         </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Receive Money (Top Up)</h3>
+
+        <div class="form">
+          <label class="label">Amount</label>
+          <input id="receiveAmount" class="input" type="number" placeholder="₦ Amount">
+
+          <button class="btn btn-success btn-full" onclick="receiveMoney()">Deposit</button>
+        </div>
+      </div>
     </section>
 
-    <section id="historySection" class="bg-gray-800 p-6 rounded-xl space-y-4">
-        <div class="flex justify-between items-center">
-            <h3 class="font-bold text-lg">Transaction History</h3>
-            <select id="filterType" onchange="renderTransactions()" class="p-2 rounded bg-gray-700 text-xs">
-                <option value="all">All</option>
-                <option value="sent">Sent</option>
-                <option value="received">Received</option>
-            </select>
-        </div>
-        <ul id="transactions" class="text-gray-300 space-y-2 max-h-64 overflow-y-auto text-sm"></ul>
+    <!-- HISTORY -->
+    <section id="historySection" class="card">
+      <div class="history-top">
+        <h3 class="card-title">Transaction History</h3>
+
+        <select id="filterType" class="input input-small">
+          <option value="all">All</option>
+          <option value="sent">Sent</option>
+          <option value="received">Received</option>
+        </select>
+      </div>
+
+      <ul id="transactions" class="transactions"></ul>
     </section>
 
-    <section id="chartSection" class="bg-gray-800 p-6 rounded-xl">
-        <h3 class="font-bold text-lg mb-4">Spending Overview</h3>
-        <div class="h-64"><canvas id="spendingChart"></canvas></div>
+    <!-- CHART -->
+    <section id="chartSection" class="card">
+      <h3 class="card-title">Spending Overview</h3>
+      <div class="chart-wrap">
+        <canvas id="spendingChart"></canvas>
+      </div>
     </section>
-</main>
+  </main>
 
-<script>
-    // 1. AUTH & PATH LOGIC
-    const user = JSON.parse(localStorage.getItem("fintechUser"));
-    
-    // Check if logged in, if not, send back to home
-    if (!localStorage.getItem("loggedIn") || !user) {
-        const isGitHub = window.location.hostname.includes('github.io');
-        window.location.href = isGitHub ? "/DanBank/index.html" : "index.html";
-    }
-
-    document.getElementById("userEmailSidebar").textContent = user.email;
-    const userKey = `data_${user.email}`;
-    let userData = JSON.parse(localStorage.getItem(userKey)) || { cards: [], transactions: [], activeCardIndex: 0 };
-
-    function saveData() { localStorage.setItem(userKey, JSON.stringify(userData)); }
-
-    // 2. SIDEBAR LOGIC
-    function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("sidebarOverlay");
-        sidebar.classList.toggle("mobile-closed");
-        overlay.classList.toggle("hidden");
-    }
-
-    function scrollToSection(id) {
-        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-        if (window.innerWidth < 768) toggleSidebar();
-    }
-
-    // 3. CARD LOGIC
-    function renderCards() {
-        const container = document.getElementById("cards");
-        container.innerHTML = "";
-        if (userData.cards.length === 0) {
-            container.innerHTML = `<p class="text-gray-500 text-sm italic">No cards added yet.</p>`;
-            document.getElementById("balance").textContent = "₦0";
-            return;
-        }
-        userData.cards.forEach((card, idx) => {
-            const isActive = idx === userData.activeCardIndex;
-            const div = document.createElement("div");
-            div.className = `p-3 rounded cursor-pointer flex justify-between ${isActive ? 'bg-indigo-600' : 'bg-gray-700'}`;
-            div.onclick = () => { userData.activeCardIndex = idx; saveData(); renderCards(); renderChart(); };
-            div.innerHTML = `<span>${card.name}</span><b>₦${card.balance.toLocaleString()}</b>`;
-            container.appendChild(div);
-        });
-        const active = userData.cards[userData.activeCardIndex];
-        document.getElementById("balance").textContent = `₦${active.balance.toLocaleString()}`;
-        document.getElementById("activeCardName").textContent = `Current: ${active.name}`;
-    }
-
-    function addCard() {
-        const name = prompt("Card Name:");
-        if (name) { userData.cards.push({ name, balance: 0 }); saveData(); renderCards(); }
-    }
-
-    // 4. MONEY LOGIC
-    function sendMoney() {
-        const amount = Number(document.getElementById("sendAmount").value);
-        const card = userData.cards[userData.activeCardIndex];
-        if (!card || amount > card.balance || amount <= 0) return alert("Invalid amount or no funds");
-        card.balance -= amount;
-        userData.transactions.push({ type: 'sent', amount, date: new Date().toLocaleDateString(), cardName: card.name });
-        saveData(); renderCards(); renderTransactions(); renderChart();
-    }
-
-    function receiveMoney() {
-        const amount = Number(document.getElementById("receiveAmount").value);
-        const card = userData.cards[userData.activeCardIndex];
-        if (!card || amount <= 0) return alert("Select a card first");
-        card.balance += amount;
-        userData.transactions.push({ type: 'received', amount, date: new Date().toLocaleDateString(), cardName: card.name });
-        saveData(); renderCards(); renderTransactions(); renderChart();
-    }
-
-    function renderTransactions() {
-        const list = document.getElementById("transactions");
-        list.innerHTML = userData.transactions.map(t => `
-            <li class="flex justify-between border-b border-gray-700 py-2">
-                <span class="${t.type === 'sent' ? 'text-red-400' : 'text-green-400'}">${t.type.toUpperCase()}</span>
-                <span>₦${t.amount.toLocaleString()}</span>
-            </li>
-        `).join('');
-    }
-
-    // 5. CHART LOGIC
-    let chart;
-    function renderChart() {
-        const ctx = document.getElementById("spendingChart").getContext("2d");
-        const sent = userData.transactions.filter(t => t.type === "sent").reduce((a, b) => a + b.amount, 0);
-        const received = userData.transactions.filter(t => t.type === "received").reduce((a, b) => a + b.amount, 0);
-        if (chart) chart.destroy();
-        chart = new Chart(ctx, {
-            type: 'doughnut',
-            data: { labels: ['Sent', 'Received'], datasets: [{ data: [sent, received], backgroundColor: ['#f87171', '#4ade80'] }] },
-            options: { maintainAspectRatio: false }
-        });
-    }
-
-    function logout() {
-        localStorage.removeItem("loggedIn");
-        const isGitHub = window.location.hostname.includes('github.io');
-        window.location.href = isGitHub ? "/DanBank/index.html" : "index.html";
-    }
-
-    renderCards(); renderTransactions(); renderChart();
-</script>
+  <script src="dashboard.js"></script>
 </body>
 </html>

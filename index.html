@@ -4,241 +4,153 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DanBank</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="temp.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
 </head>
 
-<body class="bg-black text-white">
+<body>
 
-<!-- HERO -->
-<section class="relative h-screen">
-  <img src="./background.jpg" class="absolute inset-0 w-full h-full object-cover" />
-  <div class="absolute inset-0 bg-black/60"></div>
- 
-  <div class="relative z-10 flex h-full items-center ">
-    <div class="max-w-xl">
-    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-lg border-b border-white/10 px-6 py-4">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="text-2xl md:text-4xl font-bold">Dan<span class="text-blue-500 text-2xl md:text-4xl">Bank</span></div>
-      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
-        <a href="#" class="hover:text-white transition">Features</a>
-        <a href="#" class="hover:text-white transition">Security</a>
-        <button onclick="openAuth()" class="bg-blue-600 px-5 py-2 rounded-lg text-white hover:bg-blue-500 transition">
-          Open Account
-        </button>
+  <!-- HERO -->
+  <section class="hero">
+    <img src="./background.jpg" class="hero-bg" alt="Background" />
+    <div class="hero-overlay"></div>
+
+    <!-- NAV -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="logo">Dan<span>Bank</span></div>
+
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#security">Security</a>
+          <button class="btn btn-primary" onclick="openAuth()">Open Account</button>
+        </div>
+
+        <button class="btn btn-primary btn-small mobile-btn" onclick="openAuth()">Join</button>
       </div>
-      <button onclick="openAuth()" class="md:hidden bg-blue-600 px-3 py-1.5 rounded-lg text-xs">Join</button>
-    </div>
-  </nav><br><br>
+    </nav>
 
-    <div class="px-6 md:px-16">
+    <div class="hero-content">
+      <h2 class="brand-title">Dan<span>Bank</span></h2>
 
-      <h2 class="text-5xl md:text-6xl font-bold mt-10 px-6  text-blue-400"> Dan<span class="text-white text-5xl md:text-6xl">Bank</span> </h2><br>
-      <h1 class="text-2xl md:text-4xl font-bold leading-tigh text-gray-300 mt-5 ">
-        Smart Banking that is surely built for Speed and Reliability <br> Your security is our full-time job 
+      <h1 class="hero-title">
+        Smart Banking that is surely built for Speed and Reliability <br />
+        Your security is our full-time job
       </h1>
 
-      <p class="mt-10 text-xl text-white/80  ">
-        Send, receive, and manage your money securely<br>  anytime, anywhere.
+      <p class="hero-subtitle">
+        Send, receive, and manage your money securely<br />
+        anytime, anywhere.
       </p>
-      <p class="mt-8 text-sm font-medium text-gray-400 uppercase tracking-widest">Move Fast. Save More. DanBank.</p>
 
-     <button onclick="openAuth()"     class="mt-20 md:mt-20  py-3 bg-indigo-600 rounded-xl hover:bg-indigo-500 transition  px-6 md:px-16">
-           Login / Register
+      <p class="hero-tagline">Move Fast. Save More. DanBank.</p>
+
+      <button class="btn btn-primary btn-large" onclick="openAuth()">
+        Login / Register
       </button>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SECURITY -->
-<section id="security" class="py-20 px-6">
-  <div class="text-center mb-12">
-    <h2 class="text-3xl font-bold">Your security is our priority</h2>
-    <p class="text-white/70 max-w-xl mx-auto mt-3">
-      Industry-standard protection for every transaction.
-    </p>
-  </div>
-
-  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-    <div class="bg-gray-800 p-8 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">Encrypted Wallets</h3>
-      <p class="text-white/70">Your funds are protected with bank-grade encryption.</p>
+  <!-- SECURITY -->
+  <section id="security" class="section">
+    <div class="section-header">
+      <h2>Your security is our priority</h2>
+      <p>Industry-standard protection for every transaction.</p>
     </div>
 
-    <div class="bg-gray-800 p-8 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">Fraud Detection</h3>
-      <p class="text-white/70">AI monitoring prevents suspicious activity in real-time.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Encrypted Wallets</h3>
+        <p>Your funds are protected with bank-grade encryption.</p>
+      </div>
+
+      <div class="card">
+        <h3>Fraud Detection</h3>
+        <p>AI monitoring prevents suspicious activity in real-time.</p>
+      </div>
+
+      <div class="card">
+        <h3>Regulatory Compliance</h3>
+        <p>Fully compliant with global financial standards.</p>
+      </div>
     </div>
+  </section>
 
-    <div class="bg-gray-800 p-8 rounded-xl">
-      <h3 class="text-xl font-bold mb-2">Regulatory Compliance</h3>
-      <p class="text-white/70">Fully compliant with global financial standards.</p>
+  <!-- FEATURES -->
+  <section id="features" class="section section-dark">
+    <div class="grid-4">
+      <div class="mini-card">💸 Send Money</div>
+      <div class="mini-card">📥 Receive Funds</div>
+      <div class="mini-card">💳 Pay Bills</div>
+      <div class="mini-card">📊 Track Spending</div>
+    </div>
+  </section>
+
+  <!-- TRANSACTIONS -->
+  <section class="section">
+    <div class="transactions">
+      <h3>Recent Transactions</h3>
+
+      <ul>
+        <li><span>Transfer to John</span><span>- ₦25,000</span></li>
+        <li><span>Airtime Purchase</span><span>- ₦2,000</span></li>
+        <li><span>Salary</span><span class="green">+ ₦120,000</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready to take control of your money?</h2>
+
+    <button onclick="handleCTA()" class="btn btn-dark">
+      Login to Dashboard
+    </button>
+  </section>
+
+  <!-- AUTH MODAL -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-card">
+
+      <button onclick="closeAuth()" class="close-btn">✕</button>
+
+      <div class="tabs">
+        <button onclick="showLogin()" id="loginTab" class="tab active">Login</button>
+        <button onclick="showRegister()" id="registerTab" class="tab">Register</button>
+      </div>
+
+      <!-- LOGIN -->
+      <form id="loginForm" class="form">
+        <input id="loginEmail" type="email" placeholder="Email" required>
+        <input id="loginPassword" type="password" placeholder="Password" required>
+
+        <button type="submit" class="btn btn-primary btn-full">Login</button>
+
+        <p class="form-note">
+          Login will unlock dashboard access.
+        </p>
+      </form>
+
+      <!-- REGISTER -->
+      <form id="registerForm" class="form hidden">
+        <input id="regName" type="text" placeholder="Full Name" required>
+        <input id="regEmail" type="email" placeholder="Email" required>
+        <input id="regPassword" type="password" placeholder="Password" required>
+
+        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+      </form>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        © 2026 DanBank Platform. Built by Devlion.
+      </footer>
+
     </div>
   </div>
-</section>
 
-<!-- FEATURES -->
-<section id="features" class="py-20 bg-gray-900 px-6">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6 text-center">
-    <div class="p-6 bg-black rounded-xl">💸 Send Money</div>
-    <div class="p-6 bg-black rounded-xl">📥 Receive Funds</div>
-    <div class="p-6 bg-black rounded-xl">💳 Pay Bills</div>
-    <div class="p-6 bg-black rounded-xl">📊 Track Spending</div>
-  </div>
-</section>
-
-<!-- TRANSACTIONS -->
-<section class="py-20 px-6">
-  <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8">
-    <h3 class="text-2xl font-bold mb-6">Recent Transactions</h3>
-    <ul class="space-y-4 text-white/80">
-      <li class="flex justify-between">
-        <span class="text-2xl">Transfer to John</span><span class="text-2xl">- ₦25,000</span>
-      </li>
-      <li class="flex justify-between">
-        <span class="text-2xl">Airtime Purchase</span><span class="text-2xl">- ₦2,000</span>
-      </li>
-      <li class="flex justify-between">
-        <span class="text-2xl">Salary</span><span class="text-green-400 text-2xl">+ ₦120,000</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="py-20 bg-indigo-600 text-center">
-  <h2 class="text-3xl font-bold">Ready to take control of your money?</h2>
-<button onclick="handleCTA()"
-  class="mt-6 px-6 py-3 bg-black rounded-xl border-black hover:bg-gray-700 transition">
-  <a  href="/dashboard.html">  Login to Dashboard</a>
-
-</button>
-
-
-</section>
-
-
-<!-- AUTH MODAL -->
-<div id="authModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
-  <div class="bg-gray-900 p-8 rounded-xl w-full max-w-md relative">
-
-    <button onclick="closeAuth()" class="absolute top-4 right-4 text-white/60">✕</button>
-
-    <!-- TOGGLE -->
-    <div class="flex justify-center gap-6 mb-6">
-      <button onclick="showLogin()" id="loginTab" class="font-bold text-indigo-400">Login</button>
-      <button onclick="showRegister()" id="registerTab" class="text-white/60">Register</button>
-    </div>
-
-    <!-- LOGIN -->
-  <form id="loginForm" class="space-y-4" on:submit|preventDefault={handleLogin}>
-  <input 
-    id="loginEmail" 
-    type="email" 
-    placeholder="Email"
-    class="w-full p-3 rounded bg-black border border-gray-700 text-white focus:outline-none focus:border-indigo-500"
-  >
-  <input 
-    id="loginPassword" 
-    type="password" 
-    placeholder="Password"
-    class="w-full p-3 rounded bg-black border border-gray-700 text-white focus:outline-none focus:border-indigo-500"
-  >
-  <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 py-3 rounded-xl text-white font-bold transition">
-    <a href="/dashboard.html" class="no-underline hover:no-underline">Login</a>
-  </button>
-</form>
-
-    <!-- REGISTER -->
-    <form id="registerForm" class="space-y-4 hidden">
-      <input id="regName" type="text" placeholder="Full Name"
-        class="w-full p-3 rounded bg-black border border-gray-700">
-      <input id="regEmail" type="email" placeholder="Email"
-        class="w-full p-3 rounded bg-black border border-gray-700">
-      <input id="regPassword" type="password" placeholder="Password"
-        class="w-full p-3 rounded bg-black border border-gray-700">
-      <button class="w-full bg-indigo-600 py-3 rounded-xl">Create Account</button>
-    </form>
-<!-- FOOTER -->
-<footer class="py-10 text-center text-white/50 text-sm">
-  © 2026 DanBank Platform. Built by Devlion.
-</footer>
-  </div>
-</div>
-<script>
-  const modal = document.getElementById("authModal");
-  const loginForm = document.getElementById("loginForm");
-  const registerForm = document.getElementById("registerForm");
-
-  function openAuth() {
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-  }
-
-  function closeAuth() {
-    modal.classList.add("hidden");
-  }
-
-  function showLogin() {
-    loginForm.classList.remove("hidden");
-    registerForm.classList.add("hidden");
-  }
-
-  function showRegister() {
-    registerForm.classList.remove("hidden");
-    loginForm.classList.add("hidden");
-  }
-
-  // REGISTER
-  registerForm.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const user = {
-      name: regName.value,
-      email: regEmail.value,
-      password: regPassword.value
-    };
-
-    localStorage.setItem("fintechUser", JSON.stringify(user));
-    alert("Account created successfully!");
-    showLogin();
-  });
-
-  // LOGIN
-  loginForm.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const savedUser = JSON.parse(localStorage.getItem("fintechUser"));
-
-    if (!savedUser) {
-      alert("No account found. Please register.");
-      return;
-    }
-
-    if (
-      loginEmail.value === savedUser.email &&
-      loginPassword.value === savedUser.password
-    ) {
-      localStorage.setItem("loggedIn", "true");
-      alert("Login successful!");
-      closeAuth();
-    } else {
-      alert("Invalid credentials");
-    }
-  });
-  // CTA HANDLER
-
-  function handleCTA() {
-    if (localStorage.getItem("loggedIn")) {
-         window.location.href = "/DanBank/dashboard.html";    
-       } else {
-      openAuth();
-    }
-  }
-
-
-
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
